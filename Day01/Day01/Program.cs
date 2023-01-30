@@ -114,14 +114,18 @@ namespace Day01
                 
                 When you want to create a List variable, replace T with whatever type of data you want to store in the List.
             */
-            List<string> names = new List<string>(); //this list stores strings and only strings.
-
+            List<string> names = new List<string>() { "Bruce", "Batman" }; //this list stores strings and only strings.
+            names.Add("The Dark Knight"); 
+            names.Add("World's Greatest Detective");
             /*
                 CHALLENGE 2:
 
                     Create a list that stores floats. Call the variable grades.
              
             */
+            List<float> grades;//NULL
+            //assign a value to grades
+            grades = new List<float>();//creating an instance
 
 
 
