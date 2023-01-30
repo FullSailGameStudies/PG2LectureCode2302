@@ -196,6 +196,8 @@ namespace Day01
     {
         public int Sum(int num1, int num2)
         {
+            ++num1;
+            --num2;//changing these LOCAL variables do NOT affect the variables used when calling the method
             return num1 + num2;
         }
 
