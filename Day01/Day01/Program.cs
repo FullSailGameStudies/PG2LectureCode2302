@@ -211,6 +211,13 @@ namespace Day01
                     3) print the average that is returned.
              
             */
+            float averageGrade = t1000.Average(grades);
+            Console.WriteLine("---------GRADES-----------");
+            foreach (var grade in grades)
+            {
+                Console.WriteLine(grade);
+            }
+            Console.WriteLine($"The average grade: {averageGrade}");
 
 
             Console.ReadKey(true);
@@ -242,11 +249,14 @@ namespace Day01
 
         public float Average(List<float> numbers)
         {
-            float avg = 0F;
-
             //loop over the numbers and calculate the average
+            float sum = 0F;
+            for (int i = 0; i < numbers.Count; i++)
+                sum += numbers[i];
 
-            return avg;
+            //Linq. Sum()
+
+            return sum / numbers.Count;
         }
     }
 }
