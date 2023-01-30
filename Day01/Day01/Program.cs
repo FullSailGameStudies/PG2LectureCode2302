@@ -61,7 +61,10 @@ namespace Day01
         static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-
+            Console.WriteLine("Hello Gotham. What is your name?");
+            string name = Console.ReadLine();
+            //$ - interpolated string
+            Console.WriteLine($"Hello {name}.");
             /*
               Calling a method
                 use the methods name.
@@ -90,8 +93,13 @@ namespace Day01
                     call the Sum method on the t1000 calculator. Print the sum that is returned.
              
             */
-            Calculator t1000 = new Calculator();
+            Calculator t1000 = new Calculator();//t1000 is an INSTANCE of the Calculator class
 
+            int number1 = 5, number2 = 2;
+
+            int result = t1000.Sum(number1, number2);//arguments -- values you pass in for parameters
+
+            Console.WriteLine($"{number1} + {number2} = {result}");
 
 
 
@@ -176,7 +184,7 @@ namespace Day01
             Console.ReadKey(true);
         }
 
-        private static int AddOne(int localNumber)
+        private static int AddOne(int localNumber)//pass by value
         {
             return localNumber + 1;
         }
