@@ -114,9 +114,25 @@ namespace Day01
                 
                 When you want to create a List variable, replace T with whatever type of data you want to store in the List.
             */
-            List<string> names = new List<string>() { "Bruce", "Batman" }; //this list stores strings and only strings.
-            names.Add("The Dark Knight"); 
+            List<string> names = new List<string>(10); //this list stores strings and only strings.
+            PrintInfo(names);//Count: 0  Capacity: 0
+            names.Add("The Dark Knight");
+            PrintInfo(names);//Count: 1  Capacity: 4
+            names.Add("Bruce");
+            names.Add("Batman");
             names.Add("World's Greatest Detective");
+            PrintInfo(names);//Count: 4  Capacity: 4
+            names.Add("The Bat");
+            PrintInfo(names);//Count: 5  Capacity: 8, 12?, random?
+            names.Add("Joker");
+            names.Add("Riddler");
+            names.Add("Bane");
+            names.Add("Mr Freeze");
+            PrintInfo(names);//Count: 9  Capacity: 12? 16? random?
+            names.Add("Mr Freeze");
+            names.Add("Mr Freeze");
+            PrintInfo(names);//Count: 11  Capacity: ?
+            names.Add("Mr Freeze");
             /*
                 CHALLENGE 2:
 
@@ -152,7 +168,14 @@ namespace Day01
                     Add a few grades to the grades list you created in CHALLENGE 2.
              
             */
-
+            Random rando = new Random();
+            grades.Add(94.5F);
+            grades.Add((float)(rando.NextDouble() * 100));
+            grades.Add((float)(rando.NextDouble() * 100));
+            grades.Add((float)(rando.NextDouble() * 100));
+            grades.Add((float)(rando.NextDouble() * 100));
+            grades.Add((float)(rando.NextDouble() * 100));
+            grades.Add((float)(rando.NextDouble() * 100));
 
 
 
@@ -168,6 +191,11 @@ namespace Day01
                 You can loop over a list with a for loop or a foreach loop.
                 1) for loop. use the Count property in the for condition.
                 2) foreach loop
+
+
+                Count - how many items have been ADDED
+                Capacity - how big (Length) is the internal array
+
             */
             for (int i = 0; i < letters.Count; i++)
                 Console.Write($" {letters[i]}");
@@ -186,6 +214,12 @@ namespace Day01
 
 
             Console.ReadKey(true);
+        }
+
+        private static void PrintInfo(List<string> names)
+        {
+            // \t is a tab escape sequence
+            Console.WriteLine($"Count: {names.Count}\tCapacity: {names.Capacity}");
         }
 
         private static int AddOne(int localNumber)//pass by value
