@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Intrinsics.X86;
 
 namespace Day02
 {
@@ -128,8 +129,19 @@ namespace Day02
                     3) print out the min, max, and avg
              
             */
+            List<double> grades= new List<double>();
+            for (int i = 0; i < 10; i++)
+            {
+                grades.Add( randy.NextDouble() * 100 );
+            }
+            CalculateStats(grades, out double min, out double max, out double avg);
+            foreach (var studentGrade in grades)
+            {
+                Console.WriteLine($"{studentGrade:N2}");
+            }
+            Console.WriteLine($"Min: {min:N2} Max: {max:N2} Average: {avg:N2}");
 
-
+            (double minGrade, double maxGrade, double avgGrade) = CalculateStats(grades);
 
 
 
@@ -161,6 +173,37 @@ namespace Day02
 
 
 
+        }
+
+        private static (double,double,double) CalculateStats(List<double> grades)
+        {
+            double min = double.MaxValue;
+            double max = double.MinValue;
+            double sum = 0;
+            foreach (var grade in grades)
+            {
+                sum += grade;
+                min = Math.Min(min, grade);
+                max = Math.Max(max, grade);
+            }
+            double avg = sum / grades.Count;
+            return (min,max, avg);
+        }
+
+        private static void CalculateStats(List<double> grades, out double min, out double max, out double avg)
+        {
+            min = double.MaxValue;
+            max = double.MinValue;
+            double sum = 0;
+            foreach (var grade in grades)
+            {
+                sum += grade;
+                min = Math.Min(min, grade);
+                max = Math.Max(max, grade);
+            }
+            avg = sum / grades.Count;
+
+            //C# anonymous types
         }
 
         private static char CurveGrade(ref double studentGrade, out double curveAmount)
