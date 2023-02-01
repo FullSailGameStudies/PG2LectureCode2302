@@ -74,6 +74,14 @@ namespace Day02
             */
             string spider = "Spiderman";
             bool isEven = PostFix(ref spider);
+            Console.WriteLine($"{spider}. Is postfix even? {isEven}");
+            string bats = "The Bat";
+            do
+            {
+                isEven = PostFix(ref bats);
+                Console.WriteLine($"{bats}. Is postfix even? {isEven}"); 
+            } while (isEven);
+            Console.ReadKey();
 
             /*
                 CHALLENGE 1:
@@ -162,5 +170,6 @@ namespace Day02
             hero += $"-{postFix}"; //updating hero now also updates spider
             return postFix % 2 == 0; //isEven
         }
+        //tuples
     }
 }
