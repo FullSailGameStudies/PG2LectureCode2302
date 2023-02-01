@@ -94,9 +94,9 @@ namespace Day02
              
             */
             double grade = randy.NextDouble() * 100;
-            Console.WriteLine($"Current Grade: {grade}");
-            char letterGrade = CurveGrade(ref grade);
-            Console.WriteLine($"Curved grade: {letterGrade} {grade}");
+            Console.WriteLine($"Current Grade: {grade:N2}");
+            char letterGrade = CurveGrade(ref grade, out double curved);
+            Console.WriteLine($"Curved grade: {letterGrade} {grade:N2} (curved by {curved:N2})");
             Console.ReadKey();
 
 
@@ -115,6 +115,7 @@ namespace Day02
             GetRandomColor(out randoColor);
             Console.BackgroundColor = randoColor;
             Console.WriteLine("Hello Gotham!");
+            Console.ResetColor();
 
 
             /*
@@ -122,7 +123,8 @@ namespace Day02
 
                     Write a method to calculate the stats on a list of grades
                     1) create a list of grades in main and add a few grades to it
-                    2) create a method to calculate the min, max, and avg. use out parameters to pass this data back from the method.
+                    2) create a method to calculate the min, max, and avg. 
+                        use out parameters to pass this data back from the method.
                     3) print out the min, max, and avg
              
             */
@@ -161,9 +163,10 @@ namespace Day02
 
         }
 
-        private static char CurveGrade(ref double studentGrade)
+        private static char CurveGrade(ref double studentGrade, out double curveAmount)
         {
-            studentGrade *= 1.05;
+            curveAmount = studentGrade * 0.05;
+            studentGrade += curveAmount;
             studentGrade = Math.Min(studentGrade, 100);//cap the grade at 100
             //C# ternary operator
             return (studentGrade < 59.5) ? 'F' :
@@ -176,7 +179,7 @@ namespace Day02
         private static void GetRandomColor(out ConsoleColor outColor)
         {
             //the method MUST initialize the outColor parameter
-            outColor = (ConsoleColor)randy.Next(16);
+            while ((outColor = (ConsoleColor)randy.Next(16)) == ConsoleColor.DarkYellow) ;
 
         }
 
