@@ -135,6 +135,7 @@ namespace Day02
                 grades.Add( randy.NextDouble() * 100 );
             }
             CalculateStats(grades, out double min, out double max, out double avg);
+            Console.WriteLine("-------GRADES---------");
             foreach (var studentGrade in grades)
             {
                 Console.WriteLine($"{studentGrade:N2}");
@@ -157,6 +158,7 @@ namespace Day02
                 1) bool Remove(item).  will remove the first one in the list that matches item. returns true if a match is found else removes false.
                 2) RemoveAt(index). will remove the item from the list at the index
 
+            If you know the index of the item to be removed, ALWAYS use RemoveAt.
             */
             List<string> dc = new() { "Batman", "Wonder Woman", "Aquaman", "Superman", "Aquaman" };
             bool found = dc.Remove("Aquaman");
@@ -166,10 +168,36 @@ namespace Day02
             /*
                 CHALLENGE 3:
 
-                    Using the list of grades you created in CHALLENGE 2, remove the min and max grades from the list.
+                    Using the list of grades you created in CHALLENGE 2, 
+                    remove the min and max grades from the list.
                     Print the grades.
             */
 
+            grades.Remove(min);
+            grades.Remove(max);
+
+            for (int i = 0; i < grades.Count; i++)
+            {
+                if (grades[i] == min || grades[i] == max)
+                {
+                    grades.RemoveAt(i);
+                    i--;
+                }
+            }
+            //OR
+            for (int i = grades.Count - 1; i >= 0; i--)
+            {
+                if (grades[i] == min || grades[i] == max)
+                {
+                    grades.RemoveAt(i);
+                }
+            }
+
+            Console.WriteLine("-------GRADES---------");
+            foreach (var studentGrade in grades)
+            {
+                Console.WriteLine($"{studentGrade:N2}");
+            }
 
 
 
