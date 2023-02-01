@@ -90,10 +90,14 @@ namespace Day02
                     1) pass it in by reference
                     2) calculate a 5% curve
                     3) curve the parameter in the method
-                    4) return the curve amount
+                    4) return the letter grade
              
             */
             double grade = randy.NextDouble() * 100;
+            Console.WriteLine($"Current Grade: {grade}");
+            char letterGrade = CurveGrade(ref grade);
+            Console.WriteLine($"Curved grade: {letterGrade} {grade}");
+            Console.ReadKey();
 
 
 
@@ -155,6 +159,18 @@ namespace Day02
 
 
 
+        }
+
+        private static char CurveGrade(ref double studentGrade)
+        {
+            studentGrade *= 1.05;
+            studentGrade = Math.Min(studentGrade, 100);//cap the grade at 100
+            //C# ternary operator
+            return (studentGrade < 59.5) ? 'F' :
+                   (studentGrade < 69.5) ? 'D' :
+                   (studentGrade < 79.5) ? 'C' :
+                   (studentGrade < 89.5) ? 'B' :
+                   'A';
         }
 
         private static void GetRandomColor(out ConsoleColor outColor)
