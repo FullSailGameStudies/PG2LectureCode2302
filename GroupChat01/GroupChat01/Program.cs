@@ -8,6 +8,17 @@
 
             int myFave = GetFavoriteNumber(true);
 
+            bool isEven = true;
+            if (isEven == true)
+            {
+                Console.WriteLine("It's EVEN!");
+            }
+            else //if(isEven == false)
+            {
+                Console.WriteLine("It's ODD!");
+            }
+
+
             Console.WriteLine($"My favorite number is {myFave}");
         }
 
