@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading;
 
@@ -88,6 +89,41 @@ namespace Day04
                     
             */
 
+            string s1 = "Batman", s2 = "Batmen";
+            //string.CompareTo
+            //returns these values:
+            //  -1  means LESS THAN
+            //   0  means EQUAL TO
+            //   1  means GREATER THAN
+            int compareResult = s1.CompareTo(s2);
+            if (compareResult == 0) Console.WriteLine($"{s1} EQUALS {s2}");
+            else if(compareResult == -1) Console.WriteLine($"{s1} LESS THAN {s2}");
+            else if (compareResult == 1) Console.WriteLine($"{s1} GREATER THAN {s2}");
+
+        }
+
+        static void bubbleSort(List<int> A)
+        {
+            int n = A.Count;
+            bool swapped;
+            do
+            {
+                swapped = false;
+                for (int i = 1; i <= n-1; i++)
+                {
+                    if (A[i-1] > A[i])
+                    {
+                        //swap(A[i - 1], A[i]);
+                        int temp = A[i];
+                        A[i] = A[i - 1];
+                        A[i - 1] = temp;
+                        //(A[i-1], A[i]) = (A[i], A[i-1]);
+                        swapped = true;
+                    }
+                }
+                //n = n - 1;
+                --n;
+            } while (swapped);
         }
 
         static void Bats(int i)
