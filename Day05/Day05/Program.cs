@@ -177,20 +177,7 @@ namespace Day04
                     Loop over your grades dictionary and print each student name and grade.
              
             */
-            Console.WriteLine("----PG2 2302----");
-            foreach (var grade in grades)
-            {
-                Console.ForegroundColor = (grade.Value < 59.5) ? ConsoleColor.Red :
-                                          (grade.Value < 69.5) ? ConsoleColor.DarkYellow :
-                                          (grade.Value < 79.5) ? ConsoleColor.Yellow :
-                                          (grade.Value < 89.5) ? ConsoleColor.Blue :
-                                          ConsoleColor.Green;
-
-                Console.Write($"{grade.Value,7:N2}");
-
-                Console.ResetColor();
-                Console.WriteLine($"  {grade.Key}");
-            }
+            PrintGrades(grades);
 
 
 
@@ -236,6 +223,21 @@ namespace Day04
                     else print out a message that the student was not found
              
             */
+            do
+            {
+                Console.Write(" Please enter the name of student: ");
+                string name = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(name)) break;
+
+                if (grades.TryGetValue(name, out float studentGrade))
+                {
+                    Console.WriteLine($"Current Grade for {name}: {studentGrade:N2}");
+                }
+                else
+                {
+                    Console.WriteLine($"{name} is not in PG2.");
+                }
+            } while (true);
 
 
 
@@ -261,6 +263,41 @@ namespace Day04
                     Pick any student and curve the grade (add 5) that is stored in the grades dictionary
              
             */
+            do
+            {
+                Console.Write(" Please enter the name of student to curve: ");
+                string name = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(name)) break;
+
+                if (grades.TryGetValue(name, out float studentGrade))
+                {
+                    grades[name] = Math.Min(studentGrade + 5, 100);
+                    PrintGrades(grades);
+                    Console.WriteLine($"Current Grade for {name}: {grades[name]:N2}");
+                }
+                else
+                {
+                    Console.WriteLine($"{name} is not in PG2.");
+                }
+            } while (true);
+        }
+
+        private static void PrintGrades(Dictionary<string, float> grades)
+        {
+            Console.WriteLine("----PG2 2302----");
+            foreach (var grade in grades)
+            {
+                Console.ForegroundColor = (grade.Value < 59.5) ? ConsoleColor.Red :
+                                          (grade.Value < 69.5) ? ConsoleColor.DarkYellow :
+                                          (grade.Value < 79.5) ? ConsoleColor.Yellow :
+                                          (grade.Value < 89.5) ? ConsoleColor.Blue :
+                                          ConsoleColor.Green;
+
+                Console.Write($"{grade.Value,7:N2}");
+
+                Console.ResetColor();
+                Console.WriteLine($"  {grade.Key}");
+            }
         }
 
         private static float GetGrade(Random randoFirstBlood)
