@@ -132,7 +132,8 @@ namespace Day04
 
             List<string> names = new List<string>() { "Carlos","Zeyuan","Joanna","Tyler","Damien","Kold","James","Zechariah ","Sephen",
             "Tyler","Elizabeth","Emmanuel","Harlan","Max","Tevin","Evan","Qasim ","fraser","Justin","Logan","Ralzly Kyle","Vijay","Ryan","Mason",
-            "Christian","Teondriq","Jalen","Hamilton ","Jai","Nicholas","Jaidon","Gilbert"
+            "Christian","Teondriq","Jalen","Hamilton ","Jai","Nicholas","Jaidon","Gilbert",
+            "Jacquelyn","Jennifer","Nicolas","Tyler L","Tyrone","Violet"
             };
             foreach (string name in names)
             {
@@ -212,6 +213,20 @@ namespace Day04
             if (backpack.TryGetValue(Weapon.Spear, out int spearCount))
                 Console.WriteLine($"{Weapon.Spear} count: {spearCount}");
 
+            string pizza = "Sausage Pizza";
+            if (menu.ContainsKey(pizza))
+            {
+                float cost = menu[pizza];//key-not-found exception!
+                Console.WriteLine($"{pizza} cost {cost:C2}.");
+            }
+            pizza = "Pineapple Pizza";
+            if (menu.TryGetValue(pizza, out float pizzaPrice))
+            {
+                menu[pizza] = pizzaPrice * 1.10F;
+                Console.WriteLine($"{pizza} was {pizzaPrice:C2} but now costs {menu[pizza]:C2}. Thanks Putin!!");
+            }
+
+
 
             /*
                 CHALLENGE 5:
@@ -221,9 +236,6 @@ namespace Day04
                     else print out a message that the student was not found
              
             */
-
-
-
 
 
 
