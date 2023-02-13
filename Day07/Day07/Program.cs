@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Day07CL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -40,6 +41,18 @@ namespace Day07
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Hello Gotham!");
+            GameObject gObject;//value is null
+            gObject = new GameObject(10, 15);
+            gObject.X = -100;//calls the set on the X property
+            int myX = gObject.X; //calls the get on the X property
+            gObject.SetX(1);
+            Console.WriteLine($"Number of game objects: {GameObject.NumberOfGameObjects}");
+
+            GameObject player = new GameObject(5, 5);
+            gObject.ShowMe(1);//passes in gObject to the 'this' parameter
+            player.ShowMe(1);//passes in player to the 'this' parameter
+            GameObject.DebugInfo();
 
             /*
                 CHALLENGE 1:
@@ -132,7 +145,8 @@ namespace Day07
                     Add a constructor to the Person class to initialize Age and Name
             */
 
-
+            Person bruce = new Person(35, "Bruce Wayne");
+            //Person bob = new Person();
 
 
 
@@ -157,7 +171,7 @@ namespace Day07
                     write an ItsMyBirthday method. increment age and print out a happy message.
             */
 
-
+            bruce.ItsMyBirthday();
 
 
 
@@ -165,7 +179,8 @@ namespace Day07
             /*                              
                 CHALLENGE 6:
                     
-                1) create an enum for job position (Intern, JuniorDeveloper, Developer, SeniorDeveloper, LeadDeveloper, VicePresident, President, CEO
+                1) create an enum for job position 
+                   (Intern, JuniorDeveloper, Developer, SeniorDeveloper, LeadDeveloper, VicePresident, President, CEO
                 2) add a property to store the person position
                 3) create a Promotion method.
                     pass in a parameter for the new position
