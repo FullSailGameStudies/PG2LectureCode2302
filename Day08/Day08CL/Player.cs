@@ -18,7 +18,7 @@ namespace Day08CL
 
         public override string ToString()
         {
-            return $"{base.ToString()}: {Symbol} at {X}, {Y}";
+            return $"{base.ToString()}: {Symbol} at {_x}, {Y}";
         }
     }
 }

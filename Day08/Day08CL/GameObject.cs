@@ -31,7 +31,7 @@ namespace Day08CL
 
         //C# naming convention for fields:
         //  _camelCamelCasing
-        private int _x = 10;
+        protected int _x = 10;
 
         public int GetX() { return _x; }
         public void SetX(int value) { _x = value; }
