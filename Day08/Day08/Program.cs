@@ -128,6 +128,16 @@ namespace Day08
             if(equipped is Knife hunting)
                 Console.WriteLine(hunting.Length);
 
+            foreach (Weapon weapon in weapons)
+            {
+                weapon.ShowMe();
+
+                if (weapon is Pistol bang)
+                    Console.WriteLine($"Rounds: {bang.Rounds} Mag Capacity: {bang.MagCapacity}");
+                else if(weapon is Knife cutter)
+                    Console.WriteLine($"Length of the blade: {cutter.Length}");
+            }
+
 
             /*  
                 ╔═════════════╗ 
