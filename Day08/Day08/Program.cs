@@ -1,4 +1,6 @@
-﻿namespace Day08
+﻿using Day08CL;
+
+namespace Day08
 {
     /*                    DERIVING CLASSESS          
                                                                
@@ -22,6 +24,7 @@
     {
         static void Main(string[] args)
         {
+            GameObject gObject = new GameObject(5, 10);
 
             /*
                 CHALLENGE 1:
@@ -31,6 +34,8 @@
                     Add a constructor that calls the base constructor
              
             */
+            //Weapon pewpew = new Weapon(500,100);
+            Pistol glock = new Pistol(10, 10, 1000, 50);
 
 
 
