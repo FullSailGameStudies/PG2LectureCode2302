@@ -58,13 +58,26 @@ namespace Day08
                     Create a List of Weapon. Create several Pistols and add them to the list of weapons.
             */
 
+            int num = 5;//4 bytes
+            //IMPLICIT casting
+            long bigNum = num;//8 bytes
+
+            //EXPLICIT casting
+            num = (int)bigNum;
 
 
+            //UPCASTING
+            // ALWAYS SAFE
+            //from a DERIVED type to a BASE type
+            Weapon equipped = glock;
+            Console.WriteLine(glock.Rounds);
+            //Console.WriteLine(equipped.Rounds);
 
+            List<Weapon> weapons = new List<Weapon>();
+            weapons.Add(glock);//upcasted to Weapon
+            weapons.Add(new Knife(3, 10));//upcasted to Weapon
 
-
-
-
+            //equipped = new Knife(3, 10);
 
             /*  
                 ╔═════════════╗ 
@@ -98,14 +111,22 @@ namespace Day08
                     Call ShowMe on each weapon.
                     Downcast to a Pistol and print the rounds and mag capacity of each pistol
             */
+            try
+            {
+                Knife knife = (Knife)equipped;
+            }
+            catch (Exception)
+            {
+            }
+            //'as' keyword
+            //will assign NULL to blade if equipped is NOT a knife
+            Knife blade = equipped as Knife;
+            if(blade != null)
+                Console.WriteLine(blade.Length);
 
-
-
-
-
-
-
-
+            //'is' keyword. pattern matching.
+            if(equipped is Knife hunting)
+                Console.WriteLine(hunting.Length);
 
 
             /*  
