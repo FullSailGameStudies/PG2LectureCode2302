@@ -20,7 +20,7 @@ namespace Day08CL
             Console.WriteLine($"# game objects: {NumberOfGameObjects}");
         }
         //camelCasing
-        public void ShowMe(int posX)//hidden parameter: GameObject this. this is the instance that it was called on
+        public virtual void ShowMe(int posX)//hidden parameter: GameObject this. this is the instance that it was called on
         {
             //local variables:
             //  camelCamelCasing

@@ -15,5 +15,10 @@ namespace Day08CL
         {
             Symbol = symbol;
         }
+
+        public override string ToString()
+        {
+            return $"{base.ToString()}: {Symbol} at {X}, {Y}";
+        }
     }
 }
