@@ -12,5 +12,11 @@ namespace Day08CL
         public Knife(int range, int damage) : base(range, damage)
         {
         }
+
+        public override void ShowMe()
+        {
+            base.ShowMe();
+            Console.WriteLine($"Length: {Length}");
+        }
     }
 }
