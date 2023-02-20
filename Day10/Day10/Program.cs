@@ -168,18 +168,18 @@ namespace Day10
 
             //SERIALIZE the state (data) of my objects
             string newFilePath = Path.ChangeExtension(filePath, ".json");
-            using (StreamWriter sw = new StreamWriter(newFilePath))
-            {
-                using (JsonTextWriter jtw = new JsonTextWriter(sw))
-                {
-                    JsonSerializer serializer = new JsonSerializer();
-                    serializer.Formatting = Formatting.Indented;
-                    serializer.Serialize(jtw, JLA);
-                }
-            }
+            //using (StreamWriter sw = new StreamWriter(newFilePath))
+            //{
+            //    using (JsonTextWriter jtw = new JsonTextWriter(sw))
+            //    {
+            //        JsonSerializer serializer = new JsonSerializer();
+            //        serializer.Formatting = Formatting.Indented;
+            //        serializer.Serialize(jtw, JLA);
+            //    }
+            //}
 
             //OR
-            File.WriteAllText(newFilePath, JsonConvert.SerializeObject(JLA, Formatting.Indented));
+            //File.WriteAllText(newFilePath, JsonConvert.SerializeObject(JLA, Formatting.Indented));
 
 
             /*
@@ -190,6 +190,32 @@ namespace Day10
                 Recreating the objects from the saved state (data) of objects
 
             */
+            if(File.Exists(newFilePath))
+            {
+                try
+                {
+                    string heroJson = File.ReadAllText(newFilePath);
+
+                    List<Superhero> supes = JsonConvert.DeserializeObject< List<Superhero> >(heroJson);
+
+                    foreach (var hero in supes)
+                    {
+                        Console.WriteLine($"Hello Citizen. I am {hero.Name} (aka {hero.Secret}). I can {hero.SuperPower}");
+                    }
+                }
+                catch(UnauthorizedAccessException uae)
+                {
+                    Console.WriteLine("You do not have access, Hacker!");
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("HACKERS!! Grr.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("OOPS! Hackers deleted the file.");
+            }
 
         }
     }
