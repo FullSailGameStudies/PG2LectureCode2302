@@ -1,4 +1,6 @@
-﻿namespace Day10
+﻿using System.Text;
+
+namespace Day10
 {
 
     /*
@@ -49,11 +51,23 @@
 
             */
 
-            string directories = @"C:\temp\2212"; //use @ in front of the string to ignore escape sequences inside the string
+            string directories = @"C:\temp\2302"; //use @ in front of the string to ignore escape sequences inside the string
             string fileName = "tempFile.txt";
             string filePath = Path.Combine(directories, fileName); //use Path.Combine to get the proper directory separators
 
-
+            char delimiter = '+';
+            //1. Open the file
+            using (StreamWriter sw = new StreamWriter(filePath)) //IDisposable
+            {
+                //2. write to the file
+                sw.Write("Batman is the best!");
+                sw.Write(delimiter);
+                sw.Write(5);
+                sw.Write(delimiter);
+                sw.Write(420.13);
+                sw.Write(delimiter);
+                sw.Write(true);
+            }//3. CLOSE THE FILE!  } will call Dispose() on the sw which will call Close on the file
 
 
 
@@ -79,6 +93,35 @@
 
 
 
+
+            //string csvData = File.ReadAllText("data.csv");
+            //string[] csvLines = csvData.Split(new char[] { '%'}, StringSplitOptions.RemoveEmptyEntries);
+            //foreach (var line in csvLines)
+            //{
+            //    string[] chars = line.Split('<');
+            //    foreach (string c in chars)
+            //        Console.Write(c);
+            //    Console.WriteLine();
+            //}
+            //StringBuilder sb = new StringBuilder();
+            //bool isFirst = true;
+            //bool isFirstLine = true;
+            //foreach (var line in csvLines)
+            //{
+            //    Console.WriteLine(line);
+
+            //    if (!isFirstLine)
+            //        sb.Append('%');
+            //    foreach (var c in line)
+            //    {
+            //        if (!isFirst)
+            //            sb.Append('<');
+            //        sb.Append(c);
+            //        isFirst = false;
+            //    }
+            //    isFirstLine = false;
+            //}
+            //File.WriteAllText("data2.csv", sb.ToString());
 
 
             /*
