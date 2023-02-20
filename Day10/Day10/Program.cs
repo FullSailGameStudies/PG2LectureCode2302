@@ -1,7 +1,20 @@
-﻿using System.Text;
+﻿using Newtonsoft.Json;
+using System.Text;
 
 namespace Day10
 {
+    //Masking, & (Ands) | (Ors)
+    enum Powers
+    {
+        Money = 1, Flight = 2, LazerEyes = 4, Strength = 8, Speed = 16, Swimming = 32
+    }
+
+    class Superhero
+    {
+        public string Name { get; set; }
+        public string Secret { get; set; }
+        public Powers SuperPower { get; set; }
+    }
 
     /*
         ╔══════════╗ 
@@ -55,7 +68,7 @@ namespace Day10
             string fileName = "tempFile.txt";
             string filePath = Path.Combine(directories, fileName); //use Path.Combine to get the proper directory separators
 
-            char delimiter = '+';
+            char delimiter = '\n';
             //1. Open the file
             using (StreamWriter sw = new StreamWriter(filePath)) //IDisposable
             {
@@ -81,8 +94,12 @@ namespace Day10
                 use the string's Split method
 
             */
-            string csvString = "Batman;Bruce Wayne;Bats;The Dark Knight";
-            string[] data = csvString.Split(';');
+            string csvString = "Batman;Bruce Wayne;;;Bats;The Dark Knight&&Joker&Riddler&Bane&Aquaman";
+            string[] data = csvString.Split(new char[] { ';', '&' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var item in data)
+            {
+                Console.WriteLine(item);
+            }
 
             /*
                 CHALLENGE 1:
@@ -91,18 +108,27 @@ namespace Day10
              
             */
 
+            using (StreamReader sr = new StreamReader(filePath))
+            {
+                string line;
+                while( (line = sr.ReadLine()) != null)
+                {
+                    Console.WriteLine(line);
+                }
+            }
 
 
+            Console.ReadKey();
 
-            //string csvData = File.ReadAllText("data.csv");
-            //string[] csvLines = csvData.Split(new char[] { '%'}, StringSplitOptions.RemoveEmptyEntries);
-            //foreach (var line in csvLines)
-            //{
-            //    string[] chars = line.Split('<');
-            //    foreach (string c in chars)
-            //        Console.Write(c);
-            //    Console.WriteLine();
-            //}
+            string csvData = File.ReadAllText("data2.csv");//OPENS, READS, CLOSES the file
+            string[] csvLines = csvData.Split(new char[] { '%'}, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var line in csvLines)
+            {
+                string[] chars = line.Split('<');
+                foreach (string c in chars)
+                    Console.Write(c);
+                Console.WriteLine();
+            }
             //StringBuilder sb = new StringBuilder();
             //bool isFirst = true;
             //bool isFirstLine = true;
@@ -133,9 +159,27 @@ namespace Day10
 
             */
 
+            List<Superhero> JLA = new List<Superhero>();
+            JLA.Add(new Superhero() { Name = "Batman", Secret = "Bruce Wayne", SuperPower = Powers.Money });
+            JLA.Add(new Superhero() { Name = "Superman", Secret = "Clark Kent", SuperPower = Powers.Flight | Powers.LazerEyes });
+            JLA.Add(new Superhero() { Name = "Wonder Woman", Secret = "Diana Prince", SuperPower = Powers.Strength });
+            JLA.Add(new Superhero() { Name = "Flash", Secret = "Barry Allen", SuperPower = Powers.Speed });
+            JLA.Add(new Superhero() { Name = "Aquaman", Secret = "Arthur Curry", SuperPower = Powers.Swimming });
 
+            //SERIALIZE the state (data) of my objects
+            string newFilePath = Path.ChangeExtension(filePath, ".json");
+            using (StreamWriter sw = new StreamWriter(newFilePath))
+            {
+                using (JsonTextWriter jtw = new JsonTextWriter(sw))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    serializer.Formatting = Formatting.Indented;
+                    serializer.Serialize(jtw, JLA);
+                }
+            }
 
-
+            //OR
+            File.WriteAllText(newFilePath, JsonConvert.SerializeObject(JLA, Formatting.Indented));
 
 
             /*
